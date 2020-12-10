@@ -4,9 +4,9 @@ s = []
 with open("tmp.txt","r") as i:
 	s = i.read()
 s = s.strip()
-groups = s.split("\n\n")
 
 # Part 1
+groups = s.split("\n\n")
 groups = ["".join(group.split("\n")) for group in groups]
 groups = [Counter([_ for _ in group]) for group in groups]
 print(sum([len(group.keys()) for group in groups]))

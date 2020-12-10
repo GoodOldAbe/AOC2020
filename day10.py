@@ -33,8 +33,6 @@ def compute(local_set):
 	for combination in combinations:
 		if all([combination[i]-combination[i-1]<=3 for i in range(1,len(combination))]):
 			count+=1
-	print([combination for combination in combinations if all([combination[i]-combination[i-1]<=3 for i in range(1,len(combination))])])
-	print(count)
 	return count
 
 nb_arrangments = 1
