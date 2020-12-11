@@ -32,7 +32,7 @@ layout = [[_ if _!="L" else "#" for _ in line] for line in s.split("\n")]
 nrows = len(layout)
 ncolumns = len(layout[0])
 
-# print_layout(layout)
+print_layout(layout)
 different = True
 while different:
 	different = False
@@ -45,7 +45,7 @@ while different:
 			elif count_neighbors(x,y,layout)>3 and layout[x][y]=="#":
 				new_layout[x][y] = "L"
 				different = True
-	# print_layout(new_layout)
+	print_layout(new_layout)
 	layout = new_layout
 count = sum([sum([1 if _=="#" else 0 for _ in line]) for line in layout])
 print(count)
@@ -59,47 +59,23 @@ def count_far_neighbors(x,y,layout):
 	column = [_[y] for _ in layout]
 
 	count = 0
-	for dx in [-1,1]:
-		for dy in [-1,1]:
+	for dx in [-1,0,1]:
+		for dy in [-1,0,1]:
 			for size in range(1,max(nrows,ncolumns)):
-				if 0<=(x+size*dx)<nrows and 0<=(y+size*dy)<ncolumns:
+				if 0<=(x+size*dx)<nrows and 0<=(y+size*dy)<ncolumns and (dx!=0 or dy!=0):
 					if layout[x+size*dx][y+size*dy]=="#":
 						count+=1
 					if layout[x+size*dx][y+size*dy] in ["#","L"]:
 						break
 				else:
 					break
-	if x>0:
-		for u in reversed(column[0:x]):
-			if u == "#":
-				count+=1
-			if u in ["#","L"]:
-				break
-	if x<nrows-1:
-		for u in column[x+1:]:
-			if u == "#":
-				count+=1
-			if u in ["#","L"]:
-				break
-	if y>0:
-		for v in reversed(row[0:y]):
-			if v == "#":
-				count+=1
-			if v in ["#","L"]:
-				break
-	if y<ncolumns-1:
-		for v in row[y+1:]:
-			if v == "#":
-				count+=1
-			if v in ["#","L"]:
-				break
 	return count
 
 layout = [[_ if _!="L" else "#" for _ in line] for line in s.split("\n")]
 nrows = len(layout)
 ncolumns = len(layout[0])
 
-# print_layout(layout)
+print_layout(layout)
 different = True
 while different:
 	different = False
@@ -112,7 +88,7 @@ while different:
 			elif count_far_neighbors(x,y,layout)>4 and layout[x][y]=="#":
 				new_layout[x][y] = "L"
 				different = True
-	# print_layout(new_layout)
+	print_layout(new_layout)
 	layout = new_layout
 count = sum([sum([1 if _=="#" else 0 for _ in line]) for line in layout])
 print(count)
